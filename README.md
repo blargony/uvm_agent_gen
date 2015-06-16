@@ -17,8 +17,8 @@ git clone https://github.com/blargony/uvm_agent_gen.git
 
 Run the agent_gen.py script at the command line.  It requires a few arguments:
 
- --agent_name NAME_OF_YOUR_AGENT
- --dest DIRECTORY_WHERE_YOU_WANT_THE_AGENT
+ * --agent_name name_of_your_agent
+ * --dest generated_agent_directory
 
 
 
