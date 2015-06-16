@@ -1,2 +1,24 @@
 # uvm_agent_gen
 UVM Agent Generator
+
+UVM Agents have a uniform structure something that can be templated.   One issue
+with templates within typical IDEs is that they generate code for a single file,
+not a set of related files.
+
+
+# Installation
+
+I haven't packaged this yet, so you will have to clone it from the repo
+
+git clone https://github.com/blargony/uvm_agent_gen.git
+
+
+# Operation
+
+Run the agent_gen.py script at the command line.  It requires a few arguments:
+
+ --agent_name NAME_OF_YOUR_AGENT
+ --dest DIRECTORY_WHERE_YOU_WANT_THE_AGENT
+
+
+
