@@ -10,7 +10,7 @@ not a set of related files.
 
 I haven't packaged this yet, so you will have to clone it from the repo
 
-`git clone https://github.com/blargony/uvm_agent_gen.git`
+    `git clone https://github.com/blargony/uvm_agent_gen.git`
 
 
 # Operation
