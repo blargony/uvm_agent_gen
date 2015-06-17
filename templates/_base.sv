@@ -1,9 +1,10 @@
 {% block copyright %}
 //-----------------------------------------------------------------------------
-// Insert Prefered CopyRight Here
-//-----------------------------------------------------------------------------
+{% for line in agent.copyright %}// {{ line }}
+{% endfor %}//-----------------------------------------------------------------------------
 {% endblock %}
 
+{% block comment_header %}
 /**
  * UVM Agent - {{ agent.name }}
  *
@@ -14,11 +15,10 @@
  * @par Contact:
  * {{ agent.email }}
  * @par Company:
- * <a href="http://{{ agent.href }}">{{ agent.company }}</a>
+ * <a href="{{ agent.href }}">{{ agent.company }}</a>
  *
  */
-
- * Generated File
+{% endblock %}
 
 `ifndef {{ agent.name|upper }}{{ agent.file|upper }}__SV
 `define {{ agent.name|upper }}{{ agent.file|upper }}__SV
