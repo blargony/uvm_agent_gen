@@ -2,6 +2,9 @@
 
 {% block body %}
 
+`include "uvm_macros.svh"
+import uvm_pkg::*;
+
 package {{ agent.name }}_pkg;
 
   // Custom Types
