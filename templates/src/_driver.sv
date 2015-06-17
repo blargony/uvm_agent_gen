@@ -67,10 +67,8 @@ endtask: run_phase
 
 task {{ agent.name }}_driver::drv_init();
 
-  // ========================================
-  // Place your initialization Code here
-  // ========================================
-
+  // TODO: Initialize Interface - drive all outputs to inactive state
+  // Example: m_vif.example_output_net = 0;
 endtask: drv_init
 
 
@@ -88,9 +86,7 @@ task {{ agent.name }}_driver::drv_interface();
     rsp.copy(req); // copy contents
     rsp.set_id_info(req); // copy sequence item id
 
-    // ========================================
-    // Place Driver Code Here
-    // ========================================
+    // TODO: implement driver code
 
     // Provide RSP to analysis port
     m_rsp_analysis_port.write(rsp);

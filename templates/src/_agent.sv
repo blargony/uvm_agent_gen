@@ -13,9 +13,9 @@ class {{ agent.name }}_agent extends uvm_agent;
   uvm_analysis_port#({{ agent.name }}_item) m_monitor_analysis_port;
 
   // Child Components
-  {{ agent.name }}_sequencer m_{{ agent.name }}_sequencer;
-  {{ agent.name }}_driver m_{{ agent.name }}_driver;
-  {{ agent.name }}_monitor m_{{ agent.name }}_monitor;
+  {{ agent.name }}_sequencer m_sequencer;
+  {{ agent.name }}_driver m_driver;
+  {{ agent.name }}_monitor m_monitor;
 
   // Constructor
   function new(string name = "{{ agent.name }}_agent", uvm_component parent = null);
@@ -36,13 +36,13 @@ function void {{ agent.name }}_agent::build_phase(uvm_phase phase);
   end
 
   if (m_cfg_h.m_uvm_active_passive_h == UVM_ACTIVE) begin
-    m_{{ agent.name }}_sequencer = {{ agent.name }}_sequencer::type_id::create("m_{{ agent.name }}_sequencer", this);
-    m_{{ agent.name }}_driver = {{ agent.name }}_driver::type_id::create("m_{{ agent.name }}_driver", this);
+    m_sequencer = {{ agent.name }}_sequencer::type_id::create("m_sequencer", this);
+    m_driver = {{ agent.name }}_driver::type_id::create("m_driver", this);
     m_driver_req_analysis_port = new("m_driver_req_analysis_port", this);
     m_driver_rsp_analysis_port = new("m_driver_rsp_analysis_port", this);
   end
 
-  m_{{ agent.name }}_monitor = {{ agent.name }}_monitor::type_id::create("m_{{ agent.name }}_monitor", this);
+  m_monitor = {{ agent.name }}_monitor::type_id::create("m_monitor", this);
   m_monitor_analysis_port = new("m_monitor_analysis_port", this);
 
 endfunction: build_phase
@@ -53,12 +53,12 @@ function void {{ agent.name }}_agent::connect_phase(input uvm_phase phase);
 
   // Connect
   if (m_cfg_h.m_uvm_active_passive_h == UVM_ACTIVE) begin
-    m_{{ agent.name }}_driver.seq_item_port.connect(m_{{ agent.name }}_sequencer.seq_item_export);
-    m_{{ agent.name }}_driver.m_req_analysis_port.connect(m_driver_req_analysis_port);
-    m_{{ agent.name }}_driver.m_rsp_analysis_port.connect(m_driver_rsp_analysis_port);
+    m_driver.seq_item_port.connect(m_sequencer.seq_item_export);
+    m_driver.m_req_analysis_port.connect(m_driver_req_analysis_port);
+    m_driver.m_rsp_analysis_port.connect(m_driver_rsp_analysis_port);
   end
 
-  m_{{ agent.name }}_monitor.m_analysis_port.connect(m_monitor_analysis_port);
+  m_monitor.m_analysis_port.connect(m_monitor_analysis_port);
 
 endfunction: connect_phase
 
