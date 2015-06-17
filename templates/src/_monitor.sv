@@ -68,17 +68,17 @@ task {{ agent.name }}_monitor::mon_interface();
 
     // Wait for a valid access
     @(m_vif.mon_cb);
-    if ( TODO_interface_active ) begin
-      // Construct Response
-      mon_item_h = {{ agent.name }}_item::type_id::create("mon_item", this);
 
-      // ========================================
-      // Assemble the mon_item here
-      // ========================================
+    // TODO: monitor interface for transaction
 
-      // Write the Item out
-      m_analysis_port.write(mon_item_h);
-    end
+    // Construct Monitored Item
+    mon_item_h = {{ agent.name }}_item::type_id::create("mon_item", this);
+
+    // TODO: assemble the mon_item here
+
+    // Write the Item out
+    m_analysis_port.write(mon_item_h);
+
   end
 
 endtask: mon_interface

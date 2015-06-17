@@ -6,6 +6,7 @@ class {{ agent.name }}_cfg extends uvm_object;
 
   // Member Variables to define how the Host Agent is to be built
   uvm_active_passive_enum m_uvm_active_passive_h;
+  // TODO: implement additional member variables used to configure the {{ agent.name }} agent
 
   // Constructor
   function new (string name = "{{ agent.name }}_cfg");
