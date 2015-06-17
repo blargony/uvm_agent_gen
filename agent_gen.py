@@ -8,13 +8,15 @@ import os
 from jinja2 import Template
 from jinja2 import Environment, PackageLoader
 
+import ConfigParser
+
 # Unit testing
 import unittest
 
 # *****************************************************************************
 # Agent Generator
 # *****************************************************************************
-def generate_agent (debug, agent_name, dest_dir):
+def generate_agent (debug, agent_name, settings, dest_dir):
     """
     Walk the template directory and render any templates found into the destination directory
     """
@@ -22,11 +24,16 @@ def generate_agent (debug, agent_name, dest_dir):
     env = Environment(loader=PackageLoader('agent_gen', 'templates'))
 
     agent = {}
+
+
+    agent['copyright'] = settings.get('Copyright', 'Copyright').split(r'\n')
+
+    agent['author']  = settings.get('User', 'Name')
+    agent['email']   = settings.get('User', 'Email')
+    agent['href']    = settings.get('User', 'Website')
+    agent['company'] = settings.get('User', 'Company')
+
     agent['name'] = agent_name
-    agent['author'] = "Author's Name Here"
-    agent['email'] = "Author's email address"
-    agent['href'] = "Company Website"
-    agent['company'] = "Company Name"
 
     # Create destination path if required
     if not os.path.exists(dest_dir):
@@ -97,10 +104,14 @@ def main():
                        help='Destination Directory for the rendered agent')
     args = parser.parse_args()
 
+    # Get the Config
+    settings = ConfigParser.ConfigParser()
+    settings.read('agent_gen.cfg')
+
     # -------------------------------------
     # Actually do the work we intend to do here
     # -------------------------------------
-    generate_agent(args.debug, args.agent_name, args.dest)
+    generate_agent(args.debug, args.agent_name, settings, args.dest)
 
 # -------------------------------------
 if __name__ == "__main__":
